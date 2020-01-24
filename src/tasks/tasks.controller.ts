@@ -9,7 +9,7 @@ import { Task, TaskRequestBody } from './tasks.model';
 @Controller('tasks') // decorator factory that returns a custom decorator
 export class TasksController {
 
-  tasksService: TasksService;
+  private tasksService: TasksService;
 
   constructor(tasksService: TasksService) {
     this.tasksService = tasksService;
@@ -25,6 +25,7 @@ export class TasksController {
 
   @Post()
   createTask(@Body() body: TaskRequestBody) {
-    this.tasksService.createTask(body.title, body.description, body.numPeople);
+    const {title, description, numPeople} = body;
+    return this.tasksService.createTask(title, description, numPeople);
   }
 }
