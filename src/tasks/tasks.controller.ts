@@ -2,7 +2,7 @@
  * A Controller is the routing logic of a server... it routes endpoints to providers
  */
 
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task, CreateTaskDto } from './tasks.model';
 
@@ -23,8 +23,17 @@ export class TasksController {
     return this.tasksService.getAllTasks(); // Calls the method in tasksService class which was imported
   }
 
+  /* This is an example of a REST/CRUD decorator taking an argument 
+   * (endpoint parameter, in this case)
+   * ALSO, notice the @Param in the arguments
+   */
+  @Get('/:id')
+  getOneTaskById(@Param('id') id: string): Task {
+    return this.tasksService.getOneTaskById(id);
+  }
+
   @Post()
-  createTask(@Body() createTaskBody: CreateTaskDto) {
+  createTask(@Body() createTaskBody: CreateTaskDto):Task {
     return this.tasksService.createTask(createTaskBody);
   }
 }
