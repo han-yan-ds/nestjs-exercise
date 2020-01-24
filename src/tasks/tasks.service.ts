@@ -3,12 +3,13 @@
  */
 
 import { Injectable, Get } from '@nestjs/common';
+import { Task } from './tasks.model';
 
 @Injectable()
 export class TasksService {
-  private tasksArr = ['This Works!']; // temporary, will eventually be in database instead
+  private tasksArr: Task[] = []; // temporary, will eventually be in database instead
 
-  getAllTasks() {
+  getAllTasks(): Task[] {
     return this.tasksArr;
   }
 }
