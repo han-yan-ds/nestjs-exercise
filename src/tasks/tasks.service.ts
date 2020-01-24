@@ -3,7 +3,7 @@
  */
 
 import { Injectable, Get } from '@nestjs/common';
-import { Task, TaskStatus } from './tasks.model';
+import { Task, TaskStatus, CreateTaskDto } from './tasks.model';
 import * as uuid from 'uuid';
 
 @Injectable()
@@ -14,12 +14,10 @@ export class TasksService {
     return this.tasksArr;
   }
 
-  createTask(title: string, description: string, numPeople: number): Task {
+  createTask(createTaskBody: CreateTaskDto): Task {
     const task: Task = {
+      ...createTaskBody,
       id: uuid(),
-      title,
-      description,
-      numPeople,
       status: TaskStatus.Pending
     }
     this.tasksArr.push(task);

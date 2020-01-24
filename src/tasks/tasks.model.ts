@@ -7,7 +7,7 @@ export enum TaskStatus {
   Finished = 'finished'
 };
 
-export interface TaskRequestBody {
+export interface CreateTaskDto {
   /* Purpose of this is to make sure the body of the createTask request has
    * title, description, and numPeople */
   title: string,
@@ -15,7 +15,7 @@ export interface TaskRequestBody {
   numPeople: number,
 }
 
-export interface Task extends TaskRequestBody {
+export interface Task extends CreateTaskDto {
   id: number,
   status: TaskStatus,
 }

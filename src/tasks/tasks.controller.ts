@@ -4,7 +4,7 @@
 
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { TasksService } from './tasks.service';
-import { Task, TaskRequestBody } from './tasks.model';
+import { Task, CreateTaskDto } from './tasks.model';
 
 @Controller('tasks') // decorator factory that returns a custom decorator
 export class TasksController {
@@ -24,8 +24,7 @@ export class TasksController {
   }
 
   @Post()
-  createTask(@Body() body: TaskRequestBody) {
-    const {title, description, numPeople} = body;
-    return this.tasksService.createTask(title, description, numPeople);
+  createTask(@Body() createTaskBody: CreateTaskDto) {
+    return this.tasksService.createTask(createTaskBody);
   }
 }
