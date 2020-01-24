@@ -15,13 +15,12 @@ export class TasksController {
     this.tasksService = tasksService;
   }
 
-  @Get() 
   /* In controllers, the REST/CRUD decorators (aka @Get, @Post) are 
-   * the ones that tell the controller which methods to route to BASED ON
-   * the HTTP request type */
+  * the ones that tell the controller which methods to route to BASED ON
+  * the HTTP request type */
+  @Get() 
   getAllTasks(): Task[] {
-    // Call the method in tasks.service.ts, which was imported
-    return this.tasksService.getAllTasks();
+    return this.tasksService.getAllTasks(); // Calls the method in tasksService class which was imported
   }
 
   @Post()
