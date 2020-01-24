@@ -7,10 +7,15 @@ export enum TaskStatus {
   Finished = 'finished'
 };
 
-export interface Task {
-  id: number,
+export interface TaskRequestBody {
+  /* Purpose of this is to make sure the body of the createTask request has
+   * title, description, and numPeople */
   title: string,
   description: string,
   numPeople: number,
+}
+
+export interface Task extends TaskRequestBody {
+  id: number,
   status: TaskStatus,
 }
