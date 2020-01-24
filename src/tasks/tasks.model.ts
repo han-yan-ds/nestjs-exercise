@@ -11,5 +11,6 @@ export interface Task {
   id: number,
   title: string,
   description: string,
+  numPeople: number,
   status: TaskStatus,
 }
