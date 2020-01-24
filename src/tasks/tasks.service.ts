@@ -3,7 +3,8 @@
  */
 
 import { Injectable, Get } from '@nestjs/common';
-import { Task } from './tasks.model';
+import { Task, TaskStatus } from './tasks.model';
+import * as uuid from 'uuid';
 
 @Injectable()
 export class TasksService {
@@ -11,5 +12,20 @@ export class TasksService {
 
   getAllTasks(): Task[] {
     return this.tasksArr;
+  }
+
+  createTask(title: string, description: string, numPeople: number): Task {
+    const task: Task = {
+      id: uuid(),
+      title,
+      description,
+      numPeople,
+      status: TaskStatus.Pending
+    }
+    this.tasksArr.push(task);
+    return task; 
+    /* good practice to return at end of Create because 
+     * the FrontEndDevs can get this task right away, 
+     * as opposed to having to make another call for ALL tasks just to get this new task */
   }
 }
