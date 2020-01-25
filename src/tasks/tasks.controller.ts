@@ -63,6 +63,7 @@ export class TasksController {
     @Param('id') id: string,
     @Body(ValidationPipe) createTaskBody: CreateTaskDto,
   ): Task {
+    /* Another ValidationPipe, but this time, applied as a PARAMETER PIPE (specific to a parameter) */
     return this.tasksService.replaceOneTask(id, createTaskBody);
   }
 }
