@@ -61,7 +61,7 @@ export class TasksController {
   @Put('/:id')
   replaceOneTask(
     @Param('id') id: string,
-    @Body() createTaskBody: CreateTaskDto,
+    @Body(ValidationPipe) createTaskBody: CreateTaskDto,
   ): Task {
     return this.tasksService.replaceOneTask(id, createTaskBody);
   }
