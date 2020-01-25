@@ -2,7 +2,7 @@
  * A Controller is the routing logic of a server... it routes endpoints to providers
  */
 
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task, CreateTaskDto } from './tasks.model';
 
@@ -26,5 +26,10 @@ export class TasksController {
   @Post()
   createTask(@Body() createTaskBody: CreateTaskDto) {
     return this.tasksService.createTask(createTaskBody);
+  }
+
+  @Delete('/:id')
+  deleteOneTaskById(@Param('id') id: string): Task {
+    return this.tasksService.deleteOneTaskById(id);
   }
 }
