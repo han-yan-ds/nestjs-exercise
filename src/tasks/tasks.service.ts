@@ -13,6 +13,10 @@ export class TasksService {
   getAllTasks(): Task[] {
     return this.tasksArr;
   }
+  
+  getOneTaskById(id: string): Task {
+    return this.tasksArr.find((task: Task) => task.id === id);
+  }
 
   createTask(createTaskBody: CreateTaskDto): Task {
     const task: Task = {

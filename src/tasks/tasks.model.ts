@@ -16,6 +16,6 @@ export interface CreateTaskDto {
 }
 
 export interface Task extends CreateTaskDto {
-  id: number,
+  id: string,
   status: TaskStatus,
 }
