@@ -39,6 +39,9 @@ export class TasksController {
   @Post()
   @UsePipes(ValidationPipe)
   createTask(@Body() createTaskBody: CreateTaskDto):Task {
+    /* By attaching a ValidationPipe to this method,
+     * every parameter is checked against any Class-Validator that might exist for that param's type
+     * (in this case, CreateTaskDto) */
     return this.tasksService.createTask(createTaskBody);
   }
 
