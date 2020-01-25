@@ -20,11 +20,11 @@ export class TasksController {
   * the HTTP request type */
 
   /* This is an example of a REST/CRUD decorator taking a query
-   * The Query object is optional, but it'll come in form of {term: "searchterm"} in this case
+   * The Query object is optional, but it'll come in form of {term: "<searchterm>"} in this case
    * Notice @Query decorating the parameter
    */
   @Get()
-  getTasks(@Query('term') searchTerm): Task[] {
+  getTasks(@Query('term') searchTerm: string): Task[] {
     return this.tasksService.getTasks(searchTerm);
   }
 
