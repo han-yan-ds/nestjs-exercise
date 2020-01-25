@@ -30,4 +30,11 @@ export class TasksService {
      * the FrontEndDevs can get this task right away, 
      * as opposed to having to make another call for ALL tasks just to get this new task */
   }
+
+  deleteOneTaskById(id: string): Task {
+    const foundTaskIndex = this.tasksArr.findIndex((task: Task) => task.id === id);
+    const deletedTask = this.tasksArr[foundTaskIndex];
+    this.tasksArr.splice(foundTaskIndex, 1);
+    return deletedTask;
+  }
 }
