@@ -10,8 +10,16 @@ import * as uuid from 'uuid';
 export class TasksService {
   private tasksArr: Task[] = []; // temporary, will eventually be in database instead
 
-  getAllTasks(): Task[] {
+  private getAllTasks(): Task[] {
     return this.tasksArr;
+  }
+
+  getTasks(searchTerm: string): Task[] {
+    if (!searchTerm) return this.getAllTasks(); // if there's no search term, get everything
+    searchTerm = searchTerm.toLowerCase();
+    const termInTitle = this.tasksArr.filter((task: Task) => task.title.toLowerCase().includes(searchTerm));
+    const termInDescription = this.tasksArr.filter((task: Task) => task.description.toLowerCase().includes(searchTerm));
+    return [...termInTitle, ...termInDescription];
   }
   
   getOneTaskById(id: string): Task {
@@ -49,4 +57,5 @@ export class TasksService {
     this.tasksArr[foundTaskIndex] = {...this.tasksArr[foundTaskIndex], ...createTaskBody}; // using destructuring to replace some key/values after assigning
     return this.tasksArr[foundTaskIndex];
   }
+
 }

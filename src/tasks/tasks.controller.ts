@@ -2,7 +2,7 @@
  * A Controller is the routing logic of a server... it routes endpoints to providers
  */
 
-import { Controller, Get, Post, Body, Delete, Param, Patch, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param, Patch, Put, Query } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task, CreateTaskDto, TaskStatus } from './tasks.model';
 
@@ -18,13 +18,17 @@ export class TasksController {
   /* In controllers, the REST/CRUD decorators (aka @Get, @Post) are 
   * the ones that tell the controller which methods to route to BASED ON
   * the HTTP request type */
-  @Get() 
-  getAllTasks(): Task[] {
-    return this.tasksService.getAllTasks(); // Calls the method in tasksService class which was imported
+
+  /* This is an example of a REST/CRUD decorator taking a query
+   * The Query object is optional, but it'll come in form of {term: "<searchterm>"} in this case
+   * Notice @Query decorating the parameter
+   */
+  @Get()
+  getTasks(@Query('term') searchTerm: string): Task[] {
+    return this.tasksService.getTasks(searchTerm);
   }
 
-  /* This is an example of a REST/CRUD decorator taking an argument 
-   * (endpoint parameter, in this case)
+  /* This is an example of a REST/CRUD decorator taking an endpoint parameter
    * ALSO, notice the @Param in the arguments
    */
   @Get('/:id')
