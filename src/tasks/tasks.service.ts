@@ -2,7 +2,7 @@
  * A service is the "Model" in MVC (eg: it calls CRUD operations to the database)
  */
 
-import { Injectable, Get } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { Task, TaskStatus, CreateTaskDto } from './tasks.model';
 import * as uuid from 'uuid';
 
