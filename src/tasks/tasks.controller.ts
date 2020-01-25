@@ -23,8 +23,17 @@ export class TasksController {
     return this.tasksService.getAllTasks(); // Calls the method in tasksService class which was imported
   }
 
+  /* This is an example of a REST/CRUD decorator taking an argument 
+   * (endpoint parameter, in this case)
+   * ALSO, notice the @Param in the arguments
+   */
+  @Get('/:id')
+  getOneTaskById(@Param('id') id: string): Task {
+    return this.tasksService.getOneTaskById(id);
+  }
+
   @Post()
-  createTask(@Body() createTaskBody: CreateTaskDto) {
+  createTask(@Body() createTaskBody: CreateTaskDto):Task {
     return this.tasksService.createTask(createTaskBody);
   }
 
