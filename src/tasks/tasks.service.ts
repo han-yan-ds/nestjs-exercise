@@ -43,4 +43,10 @@ export class TasksService {
     foundTask.status = newStatus;
     return foundTask;
   }
+
+  replaceOneTask(id: string, createTaskBody: CreateTaskDto): Task {
+    const foundTaskIndex = this.tasksArr.findIndex((task: Task) => task.id === id);
+    this.tasksArr[foundTaskIndex] = {...this.tasksArr[foundTaskIndex], ...createTaskBody}; // using destructuring to replace some key/values after assigning
+    return this.tasksArr[foundTaskIndex];
+  }
 }
