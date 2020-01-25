@@ -2,9 +2,9 @@
  * Creating a Task Model (right now an interface, could be class later)
  */
 export enum TaskStatus { 
-  Pending = 'pending', 
-  Active = 'active', 
-  Finished = 'finished'
+  Pending = 'Pending', 
+  Active = 'Active', 
+  Finished = 'Finished'
 };
 
 export interface CreateTaskDto {

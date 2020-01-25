@@ -37,4 +37,10 @@ export class TasksService {
     this.tasksArr.splice(foundTaskIndex, 1);
     return deletedTask;
   }
+
+  updateOneTaskStatus(id: string, newStatus: TaskStatus): Task {
+    const foundTask = this.getOneTaskById(id);
+    foundTask.status = newStatus;
+    return foundTask;
+  }
 }
