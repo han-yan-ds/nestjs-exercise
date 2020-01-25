@@ -13,6 +13,10 @@ export class TasksService {
   getAllTasks(): Task[] {
     return this.tasksArr;
   }
+  
+  getOneTaskById(id: string): Task {
+    return this.tasksArr.find((task: Task) => task.id === id);
+  }
 
   createTask(createTaskBody: CreateTaskDto): Task {
     const task: Task = {
@@ -25,5 +29,12 @@ export class TasksService {
     /* good practice to return at end of Create because 
      * the FrontEndDevs can get this task right away, 
      * as opposed to having to make another call for ALL tasks just to get this new task */
+  }
+
+  deleteOneTaskById(id: string): Task {
+    const foundTaskIndex = this.tasksArr.findIndex((task: Task) => task.id === id);
+    const deletedTask = this.tasksArr[foundTaskIndex];
+    this.tasksArr.splice(foundTaskIndex, 1);
+    return deletedTask;
   }
 }
