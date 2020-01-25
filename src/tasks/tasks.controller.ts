@@ -2,7 +2,7 @@
  * A Controller is the routing logic of a server... it routes endpoints to providers
  */
 
-import { Controller, Get, Post, Body, Delete, Param, Patch, Put, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Delete, Param, Patch, Put, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { TasksService } from './tasks.service';
 import { Task, CreateTaskDto, TaskStatus } from './tasks.model';
 
@@ -37,7 +37,11 @@ export class TasksController {
   }
 
   @Post()
+  @UsePipes(ValidationPipe)
   createTask(@Body() createTaskBody: CreateTaskDto):Task {
+    /* By attaching a ValidationPipe to this method,
+     * every parameter is checked against any Class-Validator that might exist for that param's type
+     * (in this case, CreateTaskDto) */
     return this.tasksService.createTask(createTaskBody);
   }
 
@@ -57,8 +61,9 @@ export class TasksController {
   @Put('/:id')
   replaceOneTask(
     @Param('id') id: string,
-    @Body() createTaskBody: CreateTaskDto,
+    @Body(ValidationPipe) createTaskBody: CreateTaskDto,
   ): Task {
+    /* Another ValidationPipe, but this time, applied as a PARAMETER PIPE (specific to a parameter) */
     return this.tasksService.replaceOneTask(id, createTaskBody);
   }
 }
